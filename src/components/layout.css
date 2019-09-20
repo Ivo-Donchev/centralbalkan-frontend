@@ -9,6 +9,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.centralbalkan .navigation {
-    background-color: #DDD;
+.centralbalkan header {
+    background-color: #AAA;
+    height: 150px;
+    width: 100vw;
 }
