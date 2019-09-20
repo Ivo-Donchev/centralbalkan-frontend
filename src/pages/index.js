@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Layout from "../components/layout";
 
-const url = "http://localhost:8001/api/products/";
+const url = "http://centralbalkan.com/api/products/";
 
 class IndexPage extends React.Component {
   state = {
