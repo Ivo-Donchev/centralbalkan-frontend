@@ -21,37 +21,60 @@ import ListItemText from "@material-ui/core/ListItemText";
 import "./layout.css";
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex"
+  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     height: "100px"
   },
   toolbar: {
     paddingTop: "100px",
-    minWidth: "200px"
+    width: "350px"
+  },
+  drawer: {
+    width: "350px",
+    flexShrink: 0
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3)
   }
 }));
 
-const Layout = ({ children }) => {
+const Layout = ({ categories, onCurrentCategoryChange, children }) => {
   const classes = useStyles();
+  console.log("categories: ", categories);
 
   return (
-    <div class="centralbalkan">
+    <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>Централен Балкан ЕООД</Toolbar>
       </AppBar>
-      <Drawer open={true} variant="permanent">
+      <Drawer className={classes.drawer} open={true} variant="permanent">
         <div>
           <div className={classes.toolbar} />
 
           <List>
-            <ListItem button onClick={() => alert("asd")}>
-              <ListItemText primary="Item 1" />
-            </ListItem>
+            {categories.map(category => (
+              <ListItem
+                button
+                onClick={() => onCurrentCategoryChange(category.id)}
+              >
+                <ListItemText
+                  key={category.id}
+                  primary={`${category.name} (${category.products_count})`}
+                />
+              </ListItem>
+            ))}
           </List>
         </div>
       </Drawer>
-      <main>{children}</main>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        {children}
+      </main>
       <footer></footer>
     </div>
   );
