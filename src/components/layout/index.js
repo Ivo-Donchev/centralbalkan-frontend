@@ -12,13 +12,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
-import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import "./layout.css";
+import "./styles.css";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,13 +43,12 @@ const useStyles = makeStyles(theme => ({
 
 const Layout = ({ categories, onCurrentCategoryChange, children }) => {
   const classes = useStyles();
-  console.log("categories: ", categories);
 
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} centralbalkan`}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>Централен Балкан ЕООД</Toolbar>
+      <AppBar position="fixed" className={`${classes.appBar} topMenu`}>
+        <Toolbar className="heading">Централен Балкан ЕООД</Toolbar>
       </AppBar>
       <Drawer className={classes.drawer} open={true} variant="permanent">
         <div>

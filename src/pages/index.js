@@ -2,8 +2,8 @@ import React from "react";
 import axios from "axios";
 
 import Layout from "../components/layout";
-
-const url = "http://centralbalkan.com/api/products/";
+import ProductsGrid from "../components/ProductsGrid";
+import { PRODUCT_LIST_URL } from "../constants";
 
 class IndexPage extends React.Component {
   state = {
@@ -13,7 +13,7 @@ class IndexPage extends React.Component {
   };
 
   componentDidMount() {
-    axios.get(url).then(res => {
+    axios.get(PRODUCT_LIST_URL).then(res => {
       this.setState({
         categories: res.data.categories,
         products: res.data.products
@@ -41,10 +41,10 @@ class IndexPage extends React.Component {
         categories={this.state.categories}
         onCurrentCategoryChange={this.onCurrentCategoryChange}
       >
-        <h1>{currentCategoryName}</h1>
-        {currentProducts.map(product => (
-          <div>Продукт {product.name}</div>
-        ))}
+        <ProductsGrid
+          categoryName={currentCategoryName}
+          products={currentProducts}
+        />
       </Layout>
     );
   }

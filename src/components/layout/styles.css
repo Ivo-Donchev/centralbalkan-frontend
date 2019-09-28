@@ -1,0 +1,25 @@
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.centralbalkan  .topMenu {
+    background: #3da0c4;
+}
+
+.centralbalkan  .topMenu .heading {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 20px;
+}
+
+.centralbalkan  .products-per-category {
+    background: blue;
+}
