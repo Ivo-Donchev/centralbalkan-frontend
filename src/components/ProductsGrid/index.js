@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProductsGrid = ({ categoryName, products }) => {
+const ProductsGrid = ({ categoryName, products, openProductModal }) => {
   const classes = useStyles();
 
   return (
@@ -27,7 +27,11 @@ const ProductsGrid = ({ categoryName, products }) => {
       <h1>{categoryName}</h1>
       <GridList cellHeight={400} cols={3} spacing={20}>
         {products.map(product => (
-          <GridListTile key={product.id} cols={product.cols || 1}>
+          <GridListTile
+            key={product.id}
+            cols={product.cols || 1}
+            onClick={() => openProductModal(product.id)}
+          >
             <img src={product.image} alt={product.name} />
             <GridListTileBar
               title={product.name}

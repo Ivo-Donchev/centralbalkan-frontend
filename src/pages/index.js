@@ -3,13 +3,17 @@ import axios from "axios";
 
 import Layout from "../components/layout";
 import ProductsGrid from "../components/ProductsGrid";
-import { PRODUCT_LIST_URL } from "../constants";
+import ProductModal from "../components/ProductModal";
+import { PRODUCT_LIST_URL, PRODUCT_DETAIL_URL } from "../constants";
 
 class IndexPage extends React.Component {
   state = {
     categories: [],
     products: {},
-    currentCategory: null
+    currentCategory: null,
+    isProductModalOpen: false,
+    productModalId: null,
+    productModal: null
   };
 
   componentDidMount() {
@@ -22,6 +26,23 @@ class IndexPage extends React.Component {
   }
   onCurrentCategoryChange = currentCategory =>
     this.setState({ currentCategory });
+
+  openProductModal = productModalId =>
+    this.setState({ isProductModalOpen: true }, () =>
+      axios.get(PRODUCT_DETAIL_URL(productModalId)).then(res => {
+        this.setState({
+          productModalId,
+          productModal: res.data
+        });
+      })
+    );
+
+  closeProductModal = () =>
+    this.setState({
+      isProductModalOpen: false,
+      productModalId: null,
+      ProductModal: null
+    });
 
   render() {
     const currentProducts = this.state.currentCategory
@@ -41,9 +62,17 @@ class IndexPage extends React.Component {
         categories={this.state.categories}
         onCurrentCategoryChange={this.onCurrentCategoryChange}
       >
+        {this.state.isProductModalOpen && (
+          <ProductModal
+            isOpen={this.state.isProductModalOpen}
+            handleClose={this.closeProductModal}
+            productModal={this.state.productModal}
+          />
+        )}
         <ProductsGrid
           categoryName={currentCategoryName}
           products={currentProducts}
+          openProductModal={this.openProductModal}
         />
       </Layout>
     );
